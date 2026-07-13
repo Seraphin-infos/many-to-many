@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
-    //
+    //CRUD DES PRODUITS, AVEC ROUTE
 }
