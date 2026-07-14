@@ -5,25 +5,46 @@
 <style>
     /* 1. Animation Défilement Infini (Infinite Marquee) */
     @keyframes marquee {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
     }
+
     .animate-marquee {
         display: flex;
         width: 200%;
         animation: marquee 20s linear infinite;
     }
+
     .animate-marquee:hover {
-        animation-play-state: paused; /* Pause au survol pour plus d'interaction */
+        animation-play-state: paused;
+        /* Pause au survol pour plus d'interaction */
     }
 
     /* 2. Animation de flottement 2D */
     @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(3deg); }
+
+        0%,
+        100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+            transform: translateY(-20px) rotate(3deg);
+        }
     }
-    .animate-float-slow { animation: float 8s ease-in-out infinite; }
-    .animate-float-fast { animation: float 5s ease-in-out infinite; }
+
+    .animate-float-slow {
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .animate-float-fast {
+        animation: float 5s ease-in-out infinite;
+    }
 
     /* 3. Effet d'apparition au Scroll */
     .reveal {
@@ -31,13 +52,17 @@
         transform: translateY(30px);
         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .reveal.active {
         opacity: 1;
         transform: translateY(0);
     }
 
     /* 4. Zone 3D Perspective */
-    .perspective-3d { perspective: 1200px; }
+    .perspective-3d {
+        perspective: 1200px;
+    }
+
     .tilt-card {
         transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
         transform-style: preserve-3d;
@@ -54,12 +79,12 @@
     <!-- HERO SECTION                              -->
     <!-- ========================================== -->
     <section class="relative max-w-7xl mx-auto px-6 pt-16 pb-20 lg:pt-24 lg:pb-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
+
         <div class="lg:col-span-6 space-y-8 z-10 text-center lg:text-left">
             <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">
                 🚀 Révolutionner les bases de données
             </span>
-            
+
             <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-none">
                 Gérez vos données en <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">
@@ -67,29 +92,34 @@
                 </span>
                 sans effort.
             </h1>
-            
+
             <p class="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
                 Connectez vos modèles, organisez vos entités et profitez d'une vitesse d'exécution exceptionnelle.
             </p>
 
             <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                <a href="#quick-access" 
-                   class="px-8 py-4 bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 hover:shadow-emerald-500/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
+                <a href="#quick-access"
+                    class="px-8 py-4 bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 hover:shadow-emerald-500/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
                     Découvrir nos modules
                 </a>
-                <a href="#demo" 
-                   class="px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl border border-slate-200/80 hover:bg-slate-50 hover:border-emerald-200 hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
+                <a href="#demo"
+                    class="px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl border border-slate-200/80 hover:bg-slate-50 hover:border-emerald-200 hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
                     Tester la démo
                 </a>
             </div>
         </div>
 
         <!-- Visuel interactif 3D -->
-        <div class="lg:col-span-6 flex justify-center perspective-3d z-10">
-            <div id="tiltCard" class="tilt-card w-full max-w-[500px] h-[340px] rounded-3xl bg-gradient-to-tr from-emerald-500 to-teal-600 p-[1px] shadow-2xl shadow-emerald-950/10 cursor-pointer">
+        <div class="lg:col-span-6 flex justify-center perspective-3d z-10 animate-float-infinite">
+            <div id="tiltCard" class="tilt-card w-full max-w-[500px] h-[340px] rounded-3xl bg-gradient-to-tr from-emerald-500 to-teal-600 p-[1px] shadow-2xl shadow-emerald-950/10 cursor-pointer relative overflow-hidden">
+
+                <div id="cardReflect" class="absolute inset-0 pointer-events-none z-30 transition-opacity duration-300 opacity-0 rounded-3xl"
+                    style="background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 60%); filter: blur(5px);">
+                </div>
+
                 <div class="w-full h-full bg-slate-900 rounded-3xl p-6 flex flex-col justify-between overflow-hidden relative">
                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-xl pointer-events-none"></div>
-                    
+
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <div class="flex gap-1.5">
                             <span class="w-3 h-3 rounded-full bg-rose-500"></span>
@@ -100,18 +130,18 @@
                     </div>
 
                     <div class="space-y-4 my-auto">
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl hover:bg-slate-800 transition-colors">
-                            <span class="text-xs text-emerald-400 font-semibold">Articles & Commandes</span>
+                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl hover:bg-slate-800 transition-colors duration-300">
+                            <span class="text-xs text-emerald-400 font-semibold">Articles Liés</span>
                             <span class="text-sm font-mono text-white">4 289</span>
                         </div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl hover:bg-slate-800 transition-colors">
-                            <span class="text-xs text-teal-400 font-semibold">Produits Actifs</span>
+                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl hover:bg-slate-800 transition-colors duration-300">
+                            <span class="text-xs text-teal-400 font-semibold">Catégories Actives</span>
                             <span class="text-sm font-mono text-white">128</span>
                         </div>
                     </div>
 
                     <div class="text-center text-[10px] text-slate-500 italic">
-                        Survolez pour l'effet de profondeur 3D !
+                        Je flotte à l'infini et je bouge en 3D à la souris !
                     </div>
                 </div>
             </div>
@@ -167,7 +197,7 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
+
             <!-- Menu 1: ACCUEIL -->
             <a href="" class="reveal group bg-white border border-slate-200/80 p-6 rounded-3xl hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between">
                 <div>
@@ -240,14 +270,14 @@
     <!-- ========================================== -->
     <section id="demo" class="max-w-4xl mx-auto px-6 py-16 mb-24 reveal bg-white border border-slate-200 rounded-3xl shadow-xl shadow-emerald-500/5 relative overflow-hidden">
         <div class="absolute -top-20 -left-20 w-48 h-48 bg-emerald-100/50 rounded-full blur-2xl"></div>
-        
+
         <div class="text-center mb-8 relative z-10">
             <h3 class="text-2xl font-extrabold text-slate-900">Module Interactif</h3>
             <p class="text-xs text-slate-500 mt-1">Testez les animations d'actions au clic</p>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-around gap-6 py-4 relative z-10">
-            <button onclick="triggerDemoAnimation('success')" 
+            <button onclick="triggerDemoAnimation('success')"
                 class="px-6 py-3 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 font-bold rounded-xl active:scale-95 transition-all duration-150">
                 Lancer Succès
             </button>
@@ -259,7 +289,7 @@
                 <span id="statusText" class="text-sm font-semibold text-slate-500 mt-1">En attente...</span>
             </div>
 
-            <button onclick="triggerDemoAnimation('error')" 
+            <button onclick="triggerDemoAnimation('error')"
                 class="px-6 py-3 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 font-bold rounded-xl active:scale-95 transition-all duration-150">
                 Lancer Erreur
             </button>
@@ -270,54 +300,47 @@
 
 <!-- SCRIPTS JS -->
 <script>
-    // 1. Animation 3D Tilt Card
     const card = document.getElementById('tiltCard');
-    if(card) {
+    const reflect = document.getElementById('cardReflect');
+
+    if (card && reflect) {
         card.addEventListener('mousemove', (e) => {
             const cardRect = card.getBoundingClientRect();
-            const mouseX = (e.clientX - cardRect.left) / cardRect.width - 0.5;
-            const mouseY = (e.clientY - cardRect.top) / cardRect.height - 0.5;
-            card.style.transform = `rotateX(${(-mouseY * 25).toFixed(2)}deg) rotateY(${(mouseX * 25).toFixed(2)}deg) scale3d(1.03, 1.03, 1.03)`;
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
+
+            // Position relative (entre 0 et 100) pour l'effet de reflet
+            const posX = ((e.clientX - cardRect.left) / cardWidth) * 100;
+            const posY = ((e.clientY - cardRect.top) / cardHeight) * 100;
+
+            // Position pour l'effet de rotation (entre -0.5 et 0.5)
+            const mouseX = (e.clientX - cardRect.left) / cardWidth - 0.5;
+            const mouseY = (e.clientY - cardRect.top) / cardHeight - 0.5;
+
+            const rotateX = (-mouseY * 25).toFixed(2);
+            const rotateY = (mouseX * 25).toFixed(2);
+
+            // Arrêter le flottement temporairement
+            card.parentElement.classList.remove('animate-float-infinite');
+
+            // Appliquer la rotation 3D
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            card.style.boxShadow = `${-rotateY * 1.5}px ${rotateX * 1.5}px 30px rgba(16, 185, 129, 0.2)`;
+
+            // Déplacer et rendre visible le reflet miroir
+            reflect.style.opacity = '1';
+            reflect.style.background = `radial-gradient(circle at ${posX}% ${posY}%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%)`;
         });
+
         card.addEventListener('mouseleave', () => {
+            // Remettre le flottement
+            card.parentElement.classList.add('animate-float-infinite');
             card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            card.style.boxShadow = '0 25px 50px -12px rgba(16, 185, 129, 0.1)';
+
+            // Cacher à nouveau le reflet
+            reflect.style.opacity = '0';
         });
-    }
-
-    // 2. Scroll Reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-
-    reveals.forEach(element => revealOnScroll.observe(element));
-
-    // 3. Demo Click Animation
-    function triggerDemoAnimation(type) {
-        const box = document.getElementById('statusBox');
-        const icon = document.getElementById('statusIcon');
-        const text = document.getElementById('statusText');
-
-        box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border scale-95";
-        
-        setTimeout(() => {
-            if (type === 'success') {
-                box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-lg shadow-emerald-500/10 scale-100";
-                icon.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon>';
-                icon.style.transform = "scale(1.2) rotate(360deg)";
-                text.textContent = "Succès !";
-            } else {
-                box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 border border-rose-200 bg-rose-50 text-rose-700 shadow-lg shadow-rose-500/10 scale-100";
-                icon.innerHTML = '<ion-icon name="alert-circle-outline"></ion-icon>';
-                icon.style.transform = "scale(1.2) rotate(-15deg)";
-                text.textContent = "Erreur !";
-            }
-        }, 150);
     }
 </script>
 @endsection
