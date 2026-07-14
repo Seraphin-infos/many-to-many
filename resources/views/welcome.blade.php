@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Section d'effets CSS personnalisés (Infinite Marquee, Animations 3D & Scroll) -->
 <style>
     /* 1. Animation Défilement Infini (Infinite Marquee) */
     @keyframes marquee {
@@ -25,11 +24,9 @@
         /* Pause au survol pour plus d'interaction */
     }
 
-    /* 2. Animation de flottement 2D */
+    /* 2. Animations de flottement 2D & Infinies */
     @keyframes float {
-
-        0%,
-        100% {
+        0%, 100% {
             transform: translateY(0px) rotate(0deg);
         }
 
@@ -46,7 +43,24 @@
         animation: float 5s ease-in-out infinite;
     }
 
-    /* 3. Effet d'apparition au Scroll */
+    @keyframes floatInfinite {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+    }
+    .animate-float-infinite {
+        animation: floatInfinite 6s ease-in-out infinite;
+    }
+
+    /* 3. Animation de lueur / pulsation INFINIE pour le texte de marque */
+    @keyframes pulseGlow {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(1.05); }
+    }
+    .animate-pulse-glow {
+        animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    /* 4. Effet d'apparition au Scroll */
     .reveal {
         opacity: 0;
         transform: translateY(30px);
@@ -58,7 +72,7 @@
         transform: translateY(0);
     }
 
-    /* 4. Zone 3D Perspective */
+    /* 5. Zone 3D Perspective */
     .perspective-3d {
         perspective: 1200px;
     }
@@ -71,13 +85,9 @@
 
 <div class="overflow-x-hidden bg-slate-50 relative">
 
-    <!-- Arrière-plan décoratif -->
     <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-300/20 rounded-full blur-3xl animate-float-slow pointer-events-none"></div>
     <div class="absolute top-[40%] right-10 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl animate-float-fast pointer-events-none"></div>
 
-    <!-- ========================================== -->
-    <!-- HERO SECTION                              -->
-    <!-- ========================================== -->
     <section class="relative max-w-7xl mx-auto px-6 pt-16 pb-20 lg:pt-24 lg:pb-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
         <div class="lg:col-span-6 space-y-8 z-10 text-center lg:text-left">
@@ -85,13 +95,17 @@
                 🚀 Révolutionner les bases de données
             </span>
 
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-none">
-                Gérez vos données en <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">
-                    Many To Many
-                </span>
-                sans effort.
-            </h1>
+            <div class="relative inline-block">
+                <div class="absolute inset-0 bg-emerald-400 blur-2xl rounded-full scale-75 pointer-events-none animate-pulse-glow"></div>
+                
+                <h1 class="relative text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-none">
+                    Gérez vos données en <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">
+                        Many To Many
+                    </span>
+                    sans effort.
+                </h1>
+            </div>
 
             <p class="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
                 Connectez vos modèles, organisez vos entités et profitez d'une vitesse d'exécution exceptionnelle.
@@ -109,7 +123,6 @@
             </div>
         </div>
 
-        <!-- Visuel interactif 3D -->
         <div class="lg:col-span-6 flex justify-center perspective-3d z-10 animate-float-infinite">
             <div id="tiltCard" class="tilt-card w-full max-w-[500px] h-[340px] rounded-3xl bg-gradient-to-tr from-emerald-500 to-teal-600 p-[1px] shadow-2xl shadow-emerald-950/10 cursor-pointer relative overflow-hidden">
 
@@ -149,12 +162,8 @@
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- 1. ANIMATION DÉFILEMENT INFINI (INFINITE)  -->
-    <!-- ========================================== -->
     <section class="bg-white border-y border-slate-200/80 py-8 overflow-hidden relative shadow-inner">
         <div class="animate-marquee items-center gap-12 text-slate-400 font-bold text-sm uppercase tracking-widest">
-            <!-- Liste 1 -->
             <div class="flex items-center gap-12 shrink-0">
                 <span class="flex items-center gap-2"><ion-icon class="text-emerald-500 text-xl" name="logo-laravel"></ion-icon> Laravel Framework</span>
                 <span class="text-slate-300">•</span>
@@ -167,7 +176,6 @@
                 <span class="flex items-center gap-2"><ion-icon class="text-emerald-500 text-xl" name="git-branch-outline"></ion-icon> Dynamic Many-To-Many</span>
                 <span class="text-slate-300">•</span>
             </div>
-            <!-- Duplication exacte pour l'effet en boucle infini -->
             <div class="flex items-center gap-12 shrink-0">
                 <span class="flex items-center gap-2"><ion-icon class="text-emerald-500 text-xl" name="logo-laravel"></ion-icon> Laravel Framework</span>
                 <span class="text-slate-300">•</span>
@@ -183,9 +191,6 @@
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- 2. LES 4 MENUS PRINCIPAUX DU SITE          -->
-    <!-- ========================================== -->
     <section id="quick-access" class="max-w-7xl mx-auto px-6 py-20 lg:py-28">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
@@ -198,7 +203,6 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <!-- Menu 1: ACCUEIL -->
             <a href="" class="reveal group bg-white border border-slate-200/80 p-6 rounded-3xl hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
@@ -214,7 +218,6 @@
                 </div>
             </a>
 
-            <!-- Menu 2: ORDER -->
             <a href="" class="reveal group bg-white border border-slate-200/80 p-6 rounded-3xl hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between" style="transition-delay: 100ms;">
                 <div>
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
@@ -230,7 +233,6 @@
                 </div>
             </a>
 
-            <!-- Menu 3: PRODUIT -->
             <a href="" class="reveal group bg-white border border-slate-200/80 p-6 rounded-3xl hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between" style="transition-delay: 200ms;">
                 <div>
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
@@ -246,7 +248,6 @@
                 </div>
             </a>
 
-            <!-- Menu 4: TOTAL OWT -->
             <a href="" class="reveal group bg-white border border-slate-200/80 p-6 rounded-3xl hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between" style="transition-delay: 300ms;">
                 <div>
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
@@ -265,9 +266,6 @@
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- DEMO INTERACTIVE                           -->
-    <!-- ========================================== -->
     <section id="demo" class="max-w-4xl mx-auto px-6 py-16 mb-24 reveal bg-white border border-slate-200 rounded-3xl shadow-xl shadow-emerald-500/5 relative overflow-hidden">
         <div class="absolute -top-20 -left-20 w-48 h-48 bg-emerald-100/50 rounded-full blur-2xl"></div>
 
@@ -298,8 +296,8 @@
 
 </div>
 
-<!-- SCRIPTS JS -->
 <script>
+    // --- 1. ANIMATION TILT 3D ET REFLET (RESTAURÉ) ---
     const card = document.getElementById('tiltCard');
     const reflect = document.getElementById('cardReflect');
 
@@ -341,6 +339,47 @@
             // Cacher à nouveau le reflet
             reflect.style.opacity = '0';
         });
+    }
+
+    // --- 2. APPARITION AU SCROLL (Intersection Observer) (RESTAURÉ) ---
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Stop observation once animated
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    reveals.forEach(element => {
+        revealOnScroll.observe(element);
+    });
+
+    // --- 3. ANIMATION AU CLIC (Boutons interactifs) (RESTAURÉ) ---
+    function triggerDemoAnimation(type) {
+        const box = document.getElementById('statusBox');
+        const icon = document.getElementById('statusIcon');
+        const text = document.getElementById('statusText');
+        
+        // Léger effet de recul
+        box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border scale-95";
+        
+        setTimeout(() => {
+            if (type === 'success') {
+                box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-lg shadow-emerald-500/10 scale-100";
+                icon.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon>';
+                icon.style.transform = "scale(1.2) rotate(360deg)";
+                text.textContent = "Calcul effectué !";
+            } else {
+                box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 border border-rose-200 bg-rose-50 text-rose-700 shadow-lg shadow-rose-500/10 scale-100";
+                icon.innerHTML = '<ion-icon name="alert-circle-outline"></ion-icon>';
+                icon.style.transform = "scale(1.2) rotate(-15deg)";
+                text.textContent = "Annulé.";
+            }
+        }, 150);
     }
 </script>
 @endsection
