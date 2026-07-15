@@ -17,4 +17,15 @@ class ProductsController extends Controller
         $products->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
+    public function index()
+    {
+        $products = \App\Models\Products::all();
+        return view('products.index', compact('products')); 
+    }
+
+    public function create()
+    {
+        return view('products.create');
+    }
+    
 }
