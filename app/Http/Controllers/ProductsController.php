@@ -15,5 +15,6 @@ class ProductsController extends Controller
         ]);
 
         $products->update($validated);
+        return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 }
