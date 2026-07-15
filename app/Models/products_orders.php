@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class products_orders extends Model
 {
-    //CRUD DES PRODUITS, AVEC ROUTE
+    //
 }
