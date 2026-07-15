@@ -2,7 +2,6 @@
 
 @section('content')
 <style>
-    /* 1. Animation Défilement Infini (Infinite Marquee) */
     @keyframes marquee {
         0% {
             transform: translateX(0%);
@@ -21,10 +20,8 @@
 
     .animate-marquee:hover {
         animation-play-state: paused;
-        /* Pause au survol pour plus d'interaction */
     }
 
-    /* 2. Animations de flottement 2D & Infinies */
     @keyframes float {
         0%, 100% {
             transform: translateY(0px) rotate(0deg);
@@ -51,7 +48,6 @@
         animation: floatInfinite 6s ease-in-out infinite;
     }
 
-    /* 3. Animation de lueur / pulsation INFINIE pour le texte de marque */
     @keyframes pulseGlow {
         0%, 100% { opacity: 0.2; transform: scale(1); }
         50% { opacity: 0.4; transform: scale(1.05); }
@@ -60,7 +56,6 @@
         animation: pulseGlow 4s ease-in-out infinite;
     }
 
-    /* 4. Effet d'apparition au Scroll */
     .reveal {
         opacity: 0;
         transform: translateY(30px);
@@ -72,7 +67,6 @@
         transform: translateY(0);
     }
 
-    /* 5. Zone 3D Perspective */
     .perspective-3d {
         perspective: 1200px;
     }
@@ -297,7 +291,7 @@
 </div>
 
 <script>
-    // --- 1. ANIMATION TILT 3D ET REFLET (RESTAURÉ) ---
+    // --- 3d d'animation ---
     const card = document.getElementById('tiltCard');
     const reflect = document.getElementById('cardReflect');
 
@@ -307,50 +301,42 @@
             const cardWidth = cardRect.width;
             const cardHeight = cardRect.height;
 
-            // Position relative (entre 0 et 100) pour l'effet de reflet
             const posX = ((e.clientX - cardRect.left) / cardWidth) * 100;
             const posY = ((e.clientY - cardRect.top) / cardHeight) * 100;
 
-            // Position pour l'effet de rotation (entre -0.5 et 0.5)
             const mouseX = (e.clientX - cardRect.left) / cardWidth - 0.5;
             const mouseY = (e.clientY - cardRect.top) / cardHeight - 0.5;
 
             const rotateX = (-mouseY * 25).toFixed(2);
             const rotateY = (mouseX * 25).toFixed(2);
 
-            // Arrêter le flottement temporairement
             card.parentElement.classList.remove('animate-float-infinite');
 
-            // Appliquer la rotation 3D
             card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
             card.style.boxShadow = `${-rotateY * 1.5}px ${rotateX * 1.5}px 30px rgba(16, 185, 129, 0.2)`;
 
-            // Déplacer et rendre visible le reflet miroir
             reflect.style.opacity = '1';
             reflect.style.background = `radial-gradient(circle at ${posX}% ${posY}%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%)`;
         });
 
         card.addEventListener('mouseleave', () => {
-            // Remettre le flottement
             card.parentElement.classList.add('animate-float-infinite');
             card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
             card.style.boxShadow = '0 25px 50px -12px rgba(16, 185, 129, 0.1)';
 
-            // Cacher à nouveau le reflet
             reflect.style.opacity = '0';
         });
     }
 
-    // --- 2. APPARITION AU SCROLL (Intersection Observer) (RESTAURÉ) ---
     const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Stop observation once animated
-            }
-        });
-    }, {
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observation once animated
+                }
+            });
+        }, {
         threshold: 0.15
     });
 
@@ -358,13 +344,11 @@
         revealOnScroll.observe(element);
     });
 
-    // --- 3. ANIMATION AU CLIC (Boutons interactifs) (RESTAURÉ) ---
     function triggerDemoAnimation(type) {
         const box = document.getElementById('statusBox');
         const icon = document.getElementById('statusIcon');
         const text = document.getElementById('statusText');
         
-        // Léger effet de recul
         box.className = "w-48 h-24 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border scale-95";
         
         setTimeout(() => {
