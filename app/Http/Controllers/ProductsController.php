@@ -11,5 +11,10 @@ class ProductsController extends Controller
         $products = \App\Models\Products::all();
         return view('products.index', compact('products')); 
     }
+
+    public function create()
+    {
+        return view('products.create');
+    }
     
 }
