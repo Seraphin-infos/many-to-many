@@ -8,10 +8,9 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Products::all();
+        $products = Productsapp::all();
         return view('products.index', compact('products'));
     }
-
     public function create()
     {
         return view('products.create');
