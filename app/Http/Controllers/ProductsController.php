@@ -21,10 +21,11 @@ class ProductsController extends Controller
     {
         $products = \App\Models\Products::all();
         return view('products.index', compact('products'));
+    }
     // Affiche le formulaire d'édition
     public function edit()
     {
-        return view('products.edit', compact('products'));
+        return view('products.edit');
     }
 
     public function create()
