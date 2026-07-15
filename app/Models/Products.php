@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
-    //CRUD DES PRODUITS, AVEC ROUTE
+    protected $fillable = ['name', 'description', 'price'];
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'products_orders', 'products_id', 'orders_id')
+            ->withPivot('quantite', 'prix')
+            ->withTimestamps();
+    }
+    
 }
