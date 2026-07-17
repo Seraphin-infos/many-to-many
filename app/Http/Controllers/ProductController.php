@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $Products = Products::latest()->paginate(5);
+        return view('Productss.index', compact('Productss'));
     }
 
     /**
@@ -21,6 +22,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('Productss/form');
     }
 
     /**
@@ -29,6 +31,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name'          =>  'required|string|max:255',
+            'description'   =>  'nullable|string',
+            'price'         =>  'required|numeric|min:0',
+            'stock'         =>  'required|integer|min:0',
+        ]);
+
+        Products::create($validated);
+
+        return redirect()->view('Productss/index')->with('Productss: create successfuly');
+
     }
 
     /**
@@ -44,13 +57,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("Productss.editProducts");
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Products $Productss)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -58,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $products->update($validated);
+        $Productss->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
