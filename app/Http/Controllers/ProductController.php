@@ -13,7 +13,7 @@ class ProductsController extends Controller
     public function index()
     {
         $Products = Products::latest()->paginate(5);
-        return view('Productss.index', compact('Productss'));
+        return view('Products.index', compact('Productss'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('Productss/form');
+        return view('Products.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductsController extends Controller
 
         Products::create($validated);
 
-        return redirect()->view('Productss/index')->with('Productss: create successfuly');
+        return redirect()->view('Products.index')->with('Productss: create successfuly');
 
     }
 
@@ -57,7 +57,7 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        return view("Productss.editProducts");
+        return view("Products.editProducts");
     }
 
     /**
