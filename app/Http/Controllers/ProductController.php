@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
-use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -13,12 +12,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
-        return view('products.index', compact('products'));
+        $products = Products::latest()->paginate(5);
+        return view('Products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.e($pr
      */
     public function create()
     {
@@ -46,8 +45,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $products = Product::findOrFail($id);
-        return view("products.editproduct", compact('products'));
+        return view("Products.editproduct");
     }
 
     /**
@@ -70,7 +68,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $products = Product::findOrFail($id);
+        $products = Products::findOrFail($id);
         $products->delete();
 
         return redirect()
