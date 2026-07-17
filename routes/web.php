@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('products', function () {
     return view('welcome');
 });
-Route::ressource('products', 'App\Http\Controllers\ProductsController');
+Route::resource('products', 'App\Http\Controllers\ProductsController');
