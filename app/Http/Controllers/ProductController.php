@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Products;
+use Illuminate\Http\Request;
+use App\Models\Product;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Products = Products::latest()->paginate(5);
-        return view('Productss.index', compact('Productss'));
+        $products = Product::latest()->paginate(5);
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -22,7 +23,6 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('Productss/form');
     }
 
     /**
@@ -31,17 +31,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-        $validated = $request->validate([
-            'name'          =>  'required|string|max:255',
-            'description'   =>  'nullable|string',
-            'price'         =>  'required|numeric|min:0',
-            'stock'         =>  'required|integer|min:0',
-        ]);
-
-        Products::create($validated);
-
-        return redirect()->view('Productss/index')->with('Productss: create successfuly');
-
     }
 
     /**
@@ -57,13 +46,14 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        return view("Productss.editProducts");
+        $products = Product::findOrFail($id);
+        return view("products.editproduct", compact('products'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $Productss)
+    public function update(Request $request, Products $products)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -71,7 +61,7 @@ class ProductsController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $Productss->update($validated);
+        $products->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
@@ -80,6 +70,11 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Product::findOrFail($id);
+        $products->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product deleted successfully');
     }
 }
