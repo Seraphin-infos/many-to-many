@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "lastIndexedAt": null,
+  "lastIndexedCommit": null,
+  "pluginSignature": null,
+  "settingsSignature": null,
+  "pendingChangedFiles": [
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/.codegraphy",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/.gitignore",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/app/Http/Controllers/ProductController.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/Products",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/.env.example",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/app/Models/Products.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/database/migrations/2026_07_13_114522_create_products_table.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/database/migrations/2026_07_13_114647_create_products_orders_table.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/layouts/app.blade.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/welcome.blade.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/routes/web.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/public/assets",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/app/Models/Order.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/auth",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/dashboard.blade.php"
+  ]
+}
