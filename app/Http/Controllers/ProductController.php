@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Products;
 
-class ProductController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
-        return view('products.index', compact('products'));
+        $Products = Products::latest()->paginate(5);
+        return view('Productss.index', compact('Productss'));
     }
 
     /**
@@ -23,6 +22,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('Productss/form');
     }
 
     /**
@@ -31,6 +31,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name'          =>  'required|string|max:255',
+            'description'   =>  'nullable|string',
+            'price'         =>  'required|numeric|min:0',
+            'stock'         =>  'required|integer|min:0',
+        ]);
+
+        Products::create($validated);
+
+        return redirect()->view('Productss/index')->with('Productss: create successfuly');
+
     }
 
     /**
@@ -46,13 +57,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        return view("products.editproduct");
+        return view("Productss.editProducts");
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Products $Productss)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -60,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $products->update($validated);
+        $Productss->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
