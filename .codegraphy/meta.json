@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "lastIndexedAt": null,
+  "lastIndexedCommit": null,
+  "pluginSignature": null,
+  "settingsSignature": null,
+  "pendingChangedFiles": [
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/.gitignore",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/app/Http/Controllers/ProductController.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/database/migrations/2026_07_13_114522_create_products_table.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/database/migrations/2026_07_13_114647_create_products_orders_table.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/resources/views/Products/index.blade.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/routes/web.php",
+    "/media/lucasa/Ventoy/projet laravel/many-to-many/.codegraphy"
+  ]
+}

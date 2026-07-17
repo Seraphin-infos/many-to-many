@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Products;
+use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Products = Products::latest()->paginate(5);
-        return view('Products.index', compact('Productss'));
+        $products = Products::latest()->paginate(5);
+        return view('Products.index', compact('products'));
     }
 
     /**
@@ -57,13 +57,13 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        return view("Products.editProducts");
+        return view("Products.editproduct");
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $Productss)
+    public function update(Request $request, Products $products)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -71,7 +71,7 @@ class ProductsController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $Productss->update($validated);
+        $products->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
@@ -80,6 +80,11 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Products::findOrFail($id);
+        $products->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product deleted successfully');
     }
 }
