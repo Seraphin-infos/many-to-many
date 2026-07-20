@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Models\Products;
 
 class ProductController extends Controller
 {
@@ -40,7 +40,8 @@ class ProductController extends Controller
 
         Products::create($validated);
 
-        return redirect()->route('products.index')->with('product','create product successfully')   ;
+        return redirect()->route('products.index')->with('success', 'Productss: create successfuly');
+
     }
 
     /**
@@ -62,7 +63,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Products $Productss)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -70,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $products->update($validated);
+        $Productss->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
