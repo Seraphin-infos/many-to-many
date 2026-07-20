@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     /*
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('Products.create');
+        return view('Products.createproduct');
     }
 
     /**
