@@ -1,33 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-// Route::middleware('auth')->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-// ==================== AUTHENTIFICATION ====================
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/form', function () {
-    return view('form');
-})->name('form');
-
-// ==================== DASHBOARD ====================
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');   // ← Ta page dashboard
+Route::resource('products', ProductController::class);
