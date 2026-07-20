@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('Products.create');
+        return view('Products.createproduct');
     }
 
     /**
@@ -32,16 +32,15 @@ class ProductController extends Controller
     {
         //
         $validated = $request->validate([
-            'name'          =>  'required|string|max:255',
-            'description'   =>  'nullable|string',
-            'price'         =>  'required|numeric|min:0',
-            'stock'         =>  'required|integer|min:0',
+            'name' => 'required|string|max:255',
+            'description' =>  'nullable|string',
+            'price' =>  'required|numeric|min:0',
+            'stock' =>  'required|numeric|min:0',
         ]);
 
         Products::create($validated);
 
-        return redirect()->view('Products.index')->with('Productss: create successfuly');
-
+        return redirect()->route('products.index')->with('product','create product successfully')   ;
     }
 
     /**

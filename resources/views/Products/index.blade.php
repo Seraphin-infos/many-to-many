@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="">
         <h1>Products</h1>
+        @if (session('product'))
+            <p>{{session('product')}}</p>
+        @endif
         <a href="{{ route('products.create') }}" class="btn btn-primary">Create Product</a>
         <table class="table">
             <thead>
@@ -35,6 +38,7 @@
                         <td>Vide</td>
                     </tr>
                 @endforelse
+
             </tbody>
         </table>
     </div>
