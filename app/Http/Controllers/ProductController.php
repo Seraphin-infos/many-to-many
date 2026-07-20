@@ -7,22 +7,22 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
+    /*
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Products = Products::latest()->paginate(5);
-        return view('Productss.index', compact('Productss'));
+        $products = Products::latest()->paginate(5);
+        return view('Products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.e($pr
      */
     public function create()
     {
         //
-        return view('Productss/form');
+        return view('Products.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductController extends Controller
 
         Products::create($validated);
 
-        return redirect()->view('Productss/index')->with('Productss: create successfuly');
+        return redirect()->view('Products.index')->with('Productss: create successfuly');
 
     }
 
@@ -57,13 +57,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        return view("Productss.editProducts");
+        return view("Products.editproduct");
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $Productss)
+    public function update(Request $request, Products $products)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -71,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required|decimal:1,20',
         ]);
 
-        $Productss->update($validated);
+        $products->update($validated);
         return redirect('welcome')->with('success','Produit modifié avec succès');
     }
 
@@ -80,6 +80,11 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Products::findOrFail($id);
+        $products->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product deleted successfully');
     }
 }
