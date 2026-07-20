@@ -7,22 +7,22 @@ use App\Models\Products;
 
 class ProductsController extends Controller
 {
-    /**
+    /*
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Products = Products::latest()->paginate(5);
-        return view('Productss.index', compact('Productss'));
+        $products = Products::latest()->paginate(5);
+        return view('Products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.e($pr
      */
     public function create()
     {
         //
-        return view('Productss/form');
+        return view('Products.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductsController extends Controller
 
         Products::create($validated);
 
-        return redirect()->view('Productss/index')->with('Productss: create successfuly');
+        return redirect()->route('products.index')->with('success', 'Productss: create successfuly');
 
     }
 
@@ -57,7 +57,7 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        return view("Productss.editProducts");
+        return view("Products.editproduct");
     }
 
     /**
@@ -80,6 +80,11 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Products::findOrFail($id);
+        $products->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product deleted successfully');
     }
 }
